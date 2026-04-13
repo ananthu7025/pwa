@@ -1,5 +1,5 @@
 // components/ui/Card.tsx
-import { ReactNode } from 'react';
+import { ReactNode, CSSProperties } from 'react';
 import { cx } from '@/utils';
 
 interface CardProps {
@@ -7,12 +7,14 @@ interface CardProps {
   className?: string;
   glass?:     boolean;
   onClick?:   () => void;
+  style?:     CSSProperties;
 }
 
-export function Card({ children, className, glass = false, onClick }: CardProps) {
+export function Card({ children, className, glass = false, onClick, style }: CardProps) {
   return (
     <div
       onClick={onClick}
+      style={style}
       className={cx(
         'rounded-3xl border',
         glass
