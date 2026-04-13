@@ -1,0 +1,102 @@
+/* app/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --brand:       #4f46e5;
+  --brand-light: #818cfb;
+  --brand-dark:  #3730a3;
+  --bg:          #0f172a;
+  --surface:     #1e293b;
+  --surface-2:   #263346;
+  --text:        #f1f5f9;
+  --text-muted:  #94a3b8;
+  --border:      rgba(148,163,184,0.12);
+  --success:     #10b981;
+  --danger:      #ef4444;
+  --warning:     #f59e0b;
+  --radius:      1rem;
+  --safe-top:    env(safe-area-inset-top, 0px);
+  --safe-bottom: env(safe-area-inset-bottom, 0px);
+}
+
+/* ── Reset & base ── */
+*, *::before, *::after { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+html, body { height: 100%; overflow: hidden; overscroll-behavior: none; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-geist-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Scrollable containers ── */
+.scroll-area {
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-y: contain;
+}
+
+/* ── Safe-area padding helpers ── */
+.pt-safe { padding-top: calc(var(--safe-top) + 0px); }
+.pb-safe { padding-bottom: calc(var(--safe-bottom) + 0px); }
+
+/* ── Input focus ring ── */
+input:focus-visible {
+  outline: 2px solid var(--brand);
+  outline-offset: 2px;
+}
+
+/* ── Skeleton loader ── */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position:  200% 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg,
+    var(--surface) 25%,
+    var(--surface-2) 50%,
+    var(--surface)  75%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.6s infinite;
+  border-radius: 0.5rem;
+}
+
+/* ── Leaflet overrides ── */
+.leaflet-container { background: var(--surface); }
+.leaflet-tile-pane { filter: saturate(0.7) brightness(0.85); }
+
+/* ── Page transition ── */
+.page-enter { animation: slideUp 0.35s cubic-bezier(0.16,1,0.3,1) both; }
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(14px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Ripple on button tap ── */
+@keyframes ripple {
+  to { transform: scale(4); opacity: 0; }
+}
+.ripple {
+  position: relative;
+  overflow: hidden;
+}
+.ripple::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: rgba(255,255,255,0.15);
+  border-radius: inherit;
+  transform: scale(0);
+  animation: ripple 0.4s linear;
+}
+
+/* ── Status badge ── */
+.badge-pending  { background: rgba(245,158,11,0.18); color: #fcd34d; }
+.badge-approved { background: rgba(16,185,129,0.18); color: #6ee7b7; }
+.badge-rejected { background: rgba(239,68,68,0.18);  color: #fca5a5; }
