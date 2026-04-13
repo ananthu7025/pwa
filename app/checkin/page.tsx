@@ -48,6 +48,7 @@ export default function CheckinPage() {
     try {
       const res = await checkinApi.getRequestStatus(requestId);
       if (res.status === 'approved') {
+        localStorage.setItem('last_checkin', new Date().toISOString());
         setStep('approved');
         vibrate([80, 40, 120, 40, 200]);
         return { stop: true };
@@ -97,6 +98,7 @@ export default function CheckinPage() {
       });
 
       if (res.auto_approved) {
+        localStorage.setItem('last_checkin', new Date().toISOString());
         setStep('approved');
         vibrate([80, 40, 120, 40, 200]);
         return;

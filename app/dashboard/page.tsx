@@ -25,11 +25,22 @@ export default function DashboardPage() {
   const { user, isLoading, isAuthenticated, logout } = useAuth();
   const router  = useRouter();
   const [ready, setReady] = useState(false);
+  const [checkinStatus, setCheckinStatus] = useState<boolean>(false);
+  const [checkinTime, setCheckinTime]     = useState<string | null>(null);
 
   useEffect(() => {
     if (!isLoading) {
       if (!isAuthenticated) { router.replace('/login'); return; }
       setReady(true);
+
+      const lastCheckin = localStorage.getItem('last_checkin');
+      if (lastCheckin) {
+        const d = new Date(lastCheckin);
+        if (d.toLocaleDateString() === new Date().toLocaleDateString()) {
+          setCheckinStatus(true);
+          setCheckinTime(d.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }));
+        }
+      }
     }
   }, [isLoading, isAuthenticated, router]);
 
@@ -74,19 +85,25 @@ export default function DashboardPage() {
                            border-brand-500/30 animate-slide-up"
             style={{ animationDelay: '0.05s' } as React.CSSProperties}>
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-brand-500/20 flex items-center justify-center">
-                <svg viewBox="0 0 24 24" className="w-5 h-5 text-brand-600" fill="none"
-                  stroke="currentColor" strokeWidth={2}>
-                  <path strokeLinecap="round" strokeLinejoin="round"
-                    d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
-                </svg>
+              <div className={`w-10 h-10 rounded-xl flex items-center justify-center ${checkinStatus ? 'bg-success-500/20 text-success-600' : 'bg-brand-500/20 text-brand-600'}`}>
+                {checkinStatus ? (
+                  <svg viewBox="0 0 24 24" className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M5 13l4 4L19 7"/>
+                  </svg>
+                ) : (
+                  <svg viewBox="0 0 24 24" className="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" strokeWidth={2}>
+                    <path strokeLinecap="round" strokeLinejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                  </svg>
+                )}
               </div>
-              <div>
+              <div className="flex-1 min-w-0">
                 <p className="text-xs text-brand-600 font-medium">Today's Status</p>
-                <p className="text-sm font-semibold text-slate-700">Not checked in yet</p>
+                <p className="text-sm font-semibold text-slate-800 truncate">
+                  {checkinStatus ? `Checked in at ${checkinTime}` : 'Not checked in yet'}
+                </p>
               </div>
-              <span className="ml-auto text-xs px-2.5 py-1 rounded-full badge-warning">
-                Pending
+              <span className={`ml-auto text-xs px-2.5 py-1 rounded-full whitespace-nowrap flex-shrink-0 ${checkinStatus ? 'badge-approved' : 'badge-warning'}`}>
+                {checkinStatus ? 'Approved' : 'Pending'}
               </span>
             </div>
           </Card>
