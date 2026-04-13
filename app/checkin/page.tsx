@@ -23,6 +23,7 @@ export default function CheckinPage() {
   const [officeLocation, setOfficeLocation] = useState<OfficeLocation | null>(null);
   const [officeError,    setOfficeError]   = useState<string | null>(null);
   const [requestId,      setRequestId]     = useState<string | null>(null);
+  const [requestDisplay, setRequestDisplay] = useState<string | null>(null);
   const [distance,       setDistance]      = useState<number | null>(null);
   const [verifyError,    setVerifyError]   = useState<string | null>(null);
   const [pollError,      setPollError]     = useState<string | null>(null);
@@ -95,18 +96,15 @@ export default function CheckinPage() {
         longitude: userCoords.longitude,
       });
 
-      if (res.status === 'approved') {
+      if (res.auto_approved) {
         setStep('approved');
         vibrate([80, 40, 120, 40, 200]);
         return;
       }
-      if (res.status === 'rejected') {
-        setStep('rejected');
-        vibrate([200, 100, 200]);
-        return;
-      }
+      
       // pending
-      if (res.requestId) setRequestId(res.requestId);
+      if (res.id) setRequestId(res.id);
+      if (res.requestId) setRequestDisplay(res.requestId);
       setStep('pending');
       vibrate(100);
     } catch (err: unknown) {
@@ -121,6 +119,7 @@ export default function CheckinPage() {
     setVerifyError(null);
     setPollError(null);
     setRequestId(null);
+    setRequestDisplay(null);
     setDistance(null);
   };
 
@@ -257,7 +256,7 @@ export default function CheckinPage() {
                 <div className="flex justify-between text-sm">
                   <span className="text-slate-500">Request ID</span>
                   <span className="text-slate-300 font-mono text-xs truncate max-w-[120px]">
-                    {requestId ?? '—'}
+                    {requestDisplay ?? '—'}
                   </span>
                 </div>
                 <div className="flex justify-between text-sm">

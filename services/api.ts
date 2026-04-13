@@ -19,7 +19,8 @@ export interface OfficeLocation {
 
 export interface VerifyLocationRequest  { latitude: number; longitude: number }
 export interface VerifyLocationResponse {
-  status: 'approved' | 'pending' | 'rejected';
+  auto_approved: boolean;
+  id?: string;
   requestId?: string;
   message?: string;
 }
