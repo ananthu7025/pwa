@@ -11,14 +11,7 @@ import { usePolling }           from '@/hooks/usePolling';
 import { AppShell }             from '@/components/layout/AppShell';
 import { Button }               from '@/components/ui/Button';
 import { Card }                 from '@/components/ui/Card';
-import { MapSkeleton }          from '@/components/ui/Skeleton';
 import { vibrate, formatDistance, haversineDistance } from '@/utils';
-
-// Lazy load the map to avoid SSR issues
-const MapView = dynamic(
-  () => import('@/components/ui/MapView').then(m => m.MapView),
-  { ssr: false, loading: () => <MapSkeleton /> },
-);
 
 type Step = 'map' | 'locating' | 'verifying' | 'pending' | 'approved' | 'rejected';
 
@@ -139,23 +132,28 @@ export default function CheckinPage() {
     <AppShell title="Check In" showBack>
       <div className="h-full flex flex-col">
 
-        {/* ── Map (always shown as background for map/locating/verifying steps) ── */}
+        {/* ── Ready / Verifying ── */}
         {(step === 'map' || step === 'locating' || step === 'verifying') && (
-          <div className="flex-1 relative">
-            <MapView
-              officeLocation={officeLocation}
-              userCoords={coords}
-              className="absolute inset-0"
-            />
+          <div className="flex-1 flex flex-col items-center justify-center px-6 py-10 relative overflow-hidden page-enter">
+            <div className="absolute inset-0 bg-gradient-to-b from-brand-900/10 to-surface-950/40 pointer-events-none" />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-64 h-64 bg-brand-500/10 blur-[80px] rounded-full pointer-events-none" />
 
-            {/* Overlay card */}
-            <div className="absolute inset-x-0 bottom-0 p-4 space-y-3">
+            <div className="relative z-10 w-full max-w-sm flex flex-col items-center space-y-6 mt-[-10vh]">
+              
+              {/* Location Icon */}
+              <div className="w-24 h-24 rounded-full bg-brand-500/15 border border-brand-500/30 flex items-center justify-center mb-2 shadow-glow">
+                <svg viewBox="0 0 24 24" className="w-10 h-10 text-brand-400" fill="none" stroke="currentColor" strokeWidth={1.5}>
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
+                </svg>
+              </div>
+
               {/* Office info */}
               {officeLocation && (
-                <Card glass className="px-4 py-3 animate-slide-up">
+                <Card className="w-full px-4 py-3 bg-surface-800/80 animate-slide-up border-brand-500/20">
                   <div className="flex items-center gap-3">
-                    <div className="w-8 h-8 rounded-xl bg-brand-600/50 flex items-center justify-center flex-shrink-0">
-                      <svg viewBox="0 0 24 24" className="w-4 h-4 text-brand-300" fill="currentColor">
+                    <div className="w-10 h-10 rounded-xl bg-brand-600/40 flex items-center justify-center flex-shrink-0">
+                      <svg viewBox="0 0 24 24" className="w-5 h-5 text-brand-300" fill="currentColor">
                         <path d="M12 2C8.134 2 5 5.134 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.866-3.134-7-7-7z"/>
                       </svg>
                     </div>
@@ -166,8 +164,7 @@ export default function CheckinPage() {
                       </p>
                     </div>
                     {distance !== null && (
-                      <span className="text-xs font-medium text-brand-400 bg-brand-500/20
-                                       px-2 py-1 rounded-lg flex-shrink-0">
+                      <span className="text-xs font-medium text-brand-400 bg-brand-500/20 px-2 py-1 rounded-lg flex-shrink-0">
                         {formatDistance(distance)}
                       </span>
                     )}
@@ -176,41 +173,36 @@ export default function CheckinPage() {
               )}
 
               {officeError && (
-                <Card glass className="px-4 py-3 border-danger-500/30">
-                  <p className="text-sm text-danger-400">{officeError}</p>
+                <Card className="w-full px-4 py-3 border-danger-500/30">
+                  <p className="text-sm text-center text-danger-400">{officeError}</p>
                 </Card>
               )}
 
               {/* Geo error */}
               {(geoStatus === 'error' || geoStatus === 'denied') && (
-                <Card glass className="px-4 py-3 border-danger-500/30 animate-slide-up">
-                  <p className="text-sm text-danger-400 mb-2">{geoError}</p>
-                  <Button variant="secondary" size="sm" onClick={handleCheckin}>Retry</Button>
+                <Card className="w-full px-4 py-3 border-danger-500/30 animate-slide-up text-center">
+                  <p className="text-sm text-danger-400 mb-3">{geoError}</p>
+                  <Button variant="secondary" size="sm" onClick={handleCheckin} className="w-full">Retry</Button>
                 </Card>
               )}
 
               {/* Verify error */}
               {verifyError && (
-                <Card glass className="px-4 py-3 border-danger-500/30 animate-slide-up">
+                <Card className="w-full px-4 py-3 border-danger-500/30 animate-slide-up text-center">
                   <p className="text-sm text-danger-400">{verifyError}</p>
                 </Card>
               )}
+            </div>
 
-              {/* Main CTA */}
+            {/* Bottom stick button */}
+            <div className="absolute inset-x-0 bottom-0 p-4">
               <Button
                 fullWidth
                 size="xl"
                 loading={step === 'locating' || step === 'verifying'}
                 onClick={handleCheckin}
                 disabled={step === 'locating' || step === 'verifying'}
-                icon={
-                  step === 'map' ? (
-                    <svg viewBox="0 0 24 24" className="w-5 h-5" fill="currentColor">
-                      <path d="M12 2C8.134 2 5 5.134 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.866-3.134-7-7-7z"/>
-                      <circle cx="12" cy="9" r="2.5" fill="rgba(255,255,255,0.85)"/>
-                    </svg>
-                  ) : undefined
-                }
+                className="shadow-glow-lg"
               >
                 {step === 'locating'  ? 'Getting your location…'
                  : step === 'verifying' ? 'Verifying location…'

@@ -14,14 +14,7 @@ const withPWA = require('next-pwa')({
         networkTimeoutSeconds: 10,
       },
     },
-    {
-      urlPattern: /^https:\/\/tile\.openstreetmap\.org\/.*/i,
-      handler: 'CacheFirst',
-      options: {
-        cacheName: 'map-tiles',
-        expiration: { maxEntries: 500, maxAgeSeconds: 7 * 24 * 60 * 60 },
-      },
-    },
+
     {
       urlPattern: /\.(?:png|jpg|jpeg|svg|gif|webp|ico)$/i,
       handler: 'CacheFirst',
