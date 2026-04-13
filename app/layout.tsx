@@ -1,11 +1,10 @@
 // app/layout.tsx
 import type { Metadata, Viewport } from 'next';
-import { Geist, Geist_Mono } from 'next/font/google';
+import { Inter } from 'next/font/google';
 import { AuthProvider } from '@/services/auth-context';
 import './globals.css';
 
-const geistSans = Geist({ variable: '--font-geist-sans', subsets: ['latin'] });
-const geistMono = Geist_Mono({ variable: '--font-geist-mono', subsets: ['latin'] });
+const inter = Inter({ variable: '--font-inter', subsets: ['latin'] });
 
 export const metadata: Metadata = {
   title:       'TechCheck',
@@ -41,7 +40,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
         <link rel="apple-touch-icon" href="/icons/icon-192x192.png" />
       </head>
-      <body className={`${geistSans.variable} ${geistMono.variable} h-full font-sans antialiased`}>
+      <body className={`${inter.variable} h-full font-sans antialiased`}>
         <AuthProvider>
           <div id="app-root" className="h-full">
             {children}
