@@ -13,7 +13,7 @@ export interface UserProfile   { id: string; name: string; email: string; role?:
 export interface OfficeLocation {
   latitude: number;
   longitude: number;
-  name: string;
+  locationName: string;
   radius?: number; // metres allowed for check-in
 }
 

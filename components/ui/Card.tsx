@@ -18,8 +18,8 @@ export function Card({ children, className, glass = false, onClick, style }: Car
       className={cx(
         'rounded-3xl border',
         glass
-          ? 'bg-white/5 border-white/10 backdrop-blur-sm'
-          : 'bg-surface-800 border-white/8',
+          ? 'bg-black/5 border-black/10 backdrop-blur-sm'
+          : 'bg-white border-black/5',
         'shadow-card',
         onClick && 'cursor-pointer active:scale-[0.98] transition-transform duration-150',
         className,

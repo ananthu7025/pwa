@@ -54,17 +54,17 @@ export function AppShell({ children, title, showBack = false }: AppShellProps) {
   const { user, logout } = useAuth();
 
   return (
-    <div className="flex flex-col h-full bg-surface-900 select-none">
+    <div className="flex flex-col h-full bg-surface-100 select-none">
       {/* Status bar spacer */}
-      <div className="flex-shrink-0 bg-surface-900"
+      <div className="flex-shrink-0 bg-surface-100"
         style={{ height: 'env(safe-area-inset-top, 0px)' }} />
 
       {/* Header */}
       <header className="flex-shrink-0 flex items-center justify-between
-                         px-5 py-3 bg-surface-900 border-b border-white/5">
+                         px-5 py-3 bg-surface-100 border-b border-white/5">
         {showBack ? (
           <Link href="/dashboard" className="w-10 h-10 flex items-center justify-center
-            rounded-xl text-slate-400 hover:text-slate-200 hover:bg-white/5 transition-colors">
+            rounded-xl text-slate-500 hover:text-slate-700 hover:bg-black/5 transition-colors">
             <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none"
               stroke="currentColor" strokeWidth={2}>
               <path strokeLinecap="round" strokeLinejoin="round" d="M15 19l-7-7 7-7"/>
@@ -77,12 +77,12 @@ export function AppShell({ children, title, showBack = false }: AppShellProps) {
                 <path d="M12 2C8.134 2 5 5.134 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.866-3.134-7-7-7z"/>
               </svg>
             </div>
-            <span className="font-bold text-slate-100 text-sm tracking-wide">TechCheck</span>
+            <span className="font-bold text-slate-800 text-sm tracking-wide">TechCheck</span>
           </div>
         )}
 
         {title && (
-          <h1 className="absolute left-1/2 -translate-x-1/2 font-semibold text-slate-100 text-base">
+          <h1 className="absolute left-1/2 -translate-x-1/2 font-semibold text-slate-800 text-base">
             {title}
           </h1>
         )}
@@ -104,7 +104,7 @@ export function AppShell({ children, title, showBack = false }: AppShellProps) {
       </main>
 
       {/* Bottom Nav */}
-      <nav className="flex-shrink-0 bg-surface-900 border-t border-white/5"
+      <nav className="flex-shrink-0 bg-surface-100 border-t border-white/5"
         style={{ paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}>
         <div className="flex items-stretch">
           {navItems.map(item => {
@@ -114,12 +114,12 @@ export function AppShell({ children, title, showBack = false }: AppShellProps) {
                 className={cx(
                   'flex-1 flex flex-col items-center justify-center gap-0.5 py-3',
                   'transition-colors duration-150',
-                  active ? 'text-brand-400' : 'text-slate-500 hover:text-slate-300',
+                  active ? 'text-brand-600' : 'text-slate-500 hover:text-slate-600',
                 )}>
                 {item.icon(active)}
                 <span className={cx(
                   'text-[10px] font-medium',
-                  active ? 'text-brand-400' : 'text-slate-600',
+                  active ? 'text-brand-600' : 'text-slate-600',
                 )}>{item.label}</span>
                 {active && (
                   <span className="absolute bottom-0 w-1 h-1 rounded-full bg-brand-400" />

@@ -33,16 +33,16 @@ export default function ProfilePage() {
 
         {/* Avatar card */}
         <Card className="p-6 flex flex-col items-center text-center animate-slide-up">
-          <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-brand-500 to-violet-600
+          <div className="w-20 h-20 rounded-3xl bg-gradient-to-br from-brand-500 to-brand-500
                           flex items-center justify-center mb-4 shadow-glow">
             <span className="text-2xl font-bold text-white">{initials}</span>
           </div>
-          <h2 className="text-xl font-bold text-slate-100">
+          <h2 className="text-xl font-bold text-slate-800">
             {user?.name || 'Technician'}
           </h2>
-          <p className="text-sm text-slate-400 mt-0.5">{user?.email}</p>
+          <p className="text-sm text-slate-500 mt-0.5">{user?.email}</p>
           {user?.role && (
-            <span className="mt-2 text-xs px-3 py-1 rounded-full bg-brand-500/20 text-brand-300 font-medium">
+            <span className="mt-2 text-xs px-3 py-1 rounded-full bg-brand-500/20 text-brand-600 font-medium">
               {user.role}
             </span>
           )}
@@ -57,8 +57,8 @@ export default function ProfilePage() {
             { label: 'Installed',   value: isInstalled ? 'Yes ✓' : 'No' },
           ].map(item => (
             <div key={item.label} className="flex items-center justify-between px-4 py-3.5">
-              <span className="text-sm text-slate-400">{item.label}</span>
-              <span className="text-sm font-medium text-slate-200">{item.value}</span>
+              <span className="text-sm text-slate-500">{item.label}</span>
+              <span className="text-sm font-medium text-slate-700">{item.value}</span>
             </div>
           ))}
         </Card>

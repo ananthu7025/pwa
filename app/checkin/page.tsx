@@ -141,7 +141,7 @@ export default function CheckinPage() {
               
               {/* Location Icon */}
               <div className="w-24 h-24 rounded-full bg-brand-500/15 border border-brand-500/30 flex items-center justify-center mb-2 shadow-glow">
-                <svg viewBox="0 0 24 24" className="w-10 h-10 text-brand-400" fill="none" stroke="currentColor" strokeWidth={1.5}>
+                <svg viewBox="0 0 24 24" className="w-10 h-10 text-brand-600" fill="none" stroke="currentColor" strokeWidth={1.5}>
                   <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 11-6 0 3 3 0 016 0z" />
                   <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1115 0z" />
                 </svg>
@@ -149,21 +149,21 @@ export default function CheckinPage() {
 
               {/* Office info */}
               {officeLocation && (
-                <Card className="w-full px-4 py-3 bg-surface-800/80 animate-slide-up border-brand-500/20">
+                <Card className="w-full px-4 py-3 bg-white/80 animate-slide-up border-brand-500/30">
                   <div className="flex items-center gap-3">
-                    <div className="w-10 h-10 rounded-xl bg-brand-600/40 flex items-center justify-center flex-shrink-0">
-                      <svg viewBox="0 0 24 24" className="w-5 h-5 text-brand-300" fill="currentColor">
+                    <div className="w-10 h-10 rounded-xl bg-brand-500/20 flex items-center justify-center flex-shrink-0">
+                      <svg viewBox="0 0 24 24" className="w-5 h-5 text-brand-600" fill="currentColor">
                         <path d="M12 2C8.134 2 5 5.134 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.866-3.134-7-7-7z"/>
                       </svg>
                     </div>
                     <div className="flex-1 min-w-0">
-                      <p className="text-xs text-slate-400">Office Location</p>
-                      <p className="text-sm font-semibold text-slate-100 truncate">
-                        {officeLocation.name ?? 'Main Office'}
+                      <p className="text-xs text-slate-500">Office Location</p>
+                      <p className="text-sm font-semibold text-slate-800 truncate">
+                        {officeLocation.locationName ?? 'Main Office'}
                       </p>
                     </div>
                     {distance !== null && (
-                      <span className="text-xs font-medium text-brand-400 bg-brand-500/20 px-2 py-1 rounded-lg flex-shrink-0">
+                      <span className="text-xs font-medium text-brand-600 bg-brand-500/20 px-2 py-1 rounded-lg flex-shrink-0">
                         {formatDistance(distance)}
                       </span>
                     )}
@@ -231,8 +231,8 @@ export default function CheckinPage() {
                               border-t-warning-400 animate-spin-slow" />
             </div>
 
-            <h2 className="text-2xl font-bold text-slate-50 mb-2">Awaiting Approval</h2>
-            <p className="text-slate-400 text-center text-sm leading-relaxed max-w-xs mb-8">
+            <h2 className="text-2xl font-bold text-slate-900 mb-2">Awaiting Approval</h2>
+            <p className="text-slate-500 text-center text-sm leading-relaxed max-w-xs mb-8">
               Your check-in request has been sent. Waiting for manager approval…
             </p>
 
@@ -255,20 +255,20 @@ export default function CheckinPage() {
               <div className="space-y-2">
                 <div className="flex justify-between text-sm">
                   <span className="text-slate-500">Request ID</span>
-                  <span className="text-slate-300 font-mono text-xs truncate max-w-[120px]">
+                  <span className="text-slate-600 font-mono text-xs truncate max-w-[120px]">
                     {requestDisplay ?? '—'}
                   </span>
                 </div>
                 <div className="flex justify-between text-sm">
                   <span className="text-slate-500">Submitted</span>
-                  <span className="text-slate-300">
+                  <span className="text-slate-600">
                     {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                   </span>
                 </div>
                 {distance !== null && (
                   <div className="flex justify-between text-sm">
                     <span className="text-slate-500">Distance</span>
-                    <span className="text-slate-300">{formatDistance(distance)}</span>
+                    <span className="text-slate-600">{formatDistance(distance)}</span>
                   </div>
                 )}
               </div>
@@ -303,8 +303,8 @@ export default function CheckinPage() {
               ))}
             </div>
 
-            <h2 className="text-2xl font-bold text-slate-50 mb-2">Checked In! 🎉</h2>
-            <p className="text-slate-400 text-center text-sm mb-8">
+            <h2 className="text-2xl font-bold text-slate-900 mb-2">Checked In! 🎉</h2>
+            <p className="text-slate-500 text-center text-sm mb-8">
               Your attendance has been confirmed successfully.
             </p>
 
@@ -319,7 +319,7 @@ export default function CheckinPage() {
                 </div>
                 <div>
                   <p className="text-xs text-success-500">Approved at</p>
-                  <p className="text-sm font-semibold text-slate-100">
+                  <p className="text-sm font-semibold text-slate-800">
                     {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
                   </p>
                 </div>
@@ -345,8 +345,8 @@ export default function CheckinPage() {
               </div>
             </div>
 
-            <h2 className="text-2xl font-bold text-slate-50 mb-2">Request Rejected</h2>
-            <p className="text-slate-400 text-center text-sm mb-8 max-w-xs">
+            <h2 className="text-2xl font-bold text-slate-900 mb-2">Request Rejected</h2>
+            <p className="text-slate-500 text-center text-sm mb-8 max-w-xs">
               Your check-in was not approved. You may be outside the allowed zone or there
               was an issue with verification.
             </p>

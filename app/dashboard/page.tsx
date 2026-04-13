@@ -52,14 +52,14 @@ export default function DashboardPage() {
               <p className="text-xs font-medium text-slate-500 uppercase tracking-widest mb-1">
                 {formatDate()}
               </p>
-              <h2 className="text-2xl font-bold text-slate-50 leading-tight">
+              <h2 className="text-2xl font-bold text-slate-900 leading-tight">
                 {getGreeting()},<br />
-                <span className="text-brand-400">{firstName}</span> 👋
+                <span className="text-brand-600">{firstName}</span> 👋
               </h2>
             </div>
             <button onClick={() => { logout(); router.replace('/login'); }}
-              className="w-10 h-10 rounded-xl bg-white/5 border border-white/10
-                         flex items-center justify-center text-slate-400
+              className="w-10 h-10 rounded-xl bg-black/5 border border-black/10
+                         flex items-center justify-center text-slate-500
                          hover:text-danger-400 hover:bg-danger-500/10 transition-colors">
               <svg viewBox="0 0 24 24" className="w-5 h-5" fill="none"
                 stroke="currentColor" strokeWidth={2}>
@@ -70,20 +70,20 @@ export default function DashboardPage() {
           </div>
 
           {/* Status banner */}
-          <Card className="p-4 bg-gradient-to-br from-brand-700/30 to-violet-800/20
-                           border-brand-500/20 animate-slide-up"
+          <Card className="p-4 bg-gradient-to-br from-brand-500/20 to-brand-500/10
+                           border-brand-500/30 animate-slide-up"
             style={{ animationDelay: '0.05s' } as React.CSSProperties}>
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 rounded-xl bg-brand-600/40 flex items-center justify-center">
-                <svg viewBox="0 0 24 24" className="w-5 h-5 text-brand-300" fill="none"
+              <div className="w-10 h-10 rounded-xl bg-brand-500/20 flex items-center justify-center">
+                <svg viewBox="0 0 24 24" className="w-5 h-5 text-brand-600" fill="none"
                   stroke="currentColor" strokeWidth={2}>
                   <path strokeLinecap="round" strokeLinejoin="round"
                     d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                 </svg>
               </div>
               <div>
-                <p className="text-xs text-brand-400 font-medium">Today's Status</p>
-                <p className="text-sm font-semibold text-slate-200">Not checked in yet</p>
+                <p className="text-xs text-brand-600 font-medium">Today's Status</p>
+                <p className="text-sm font-semibold text-slate-700">Not checked in yet</p>
               </div>
               <span className="ml-auto text-xs px-2.5 py-1 rounded-full badge-warning">
                 Pending
@@ -95,12 +95,12 @@ export default function DashboardPage() {
           <Link href="/checkin" className="block animate-slide-up"
             style={{ animationDelay: '0.1s' }}>
             <button className="w-full h-20 rounded-3xl
-              bg-gradient-to-r from-brand-600 to-violet-600
+              bg-gradient-to-r from-brand-500 to-brand-500
               flex items-center justify-between px-6
               shadow-glow hover:shadow-glow-lg active:scale-[0.98]
               transition-all duration-200 group">
               <div className="flex items-center gap-4">
-                <div className="w-12 h-12 rounded-2xl bg-white/15 flex items-center justify-center">
+                <div className="w-12 h-12 rounded-2xl bg-black/10 flex items-center justify-center">
                   <svg viewBox="0 0 24 24" className="w-6 h-6 text-white" fill="currentColor">
                     <path d="M12 2C8.134 2 5 5.134 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.866-3.134-7-7-7z"/>
                     <circle cx="12" cy="9" r="2.5" fill="rgba(255,255,255,0.85)"/>
@@ -132,7 +132,7 @@ export default function DashboardPage() {
                 </svg>
               </div>
               <p className="text-xs text-slate-500 mb-0.5">Current Time</p>
-              <p className="text-lg font-bold text-slate-100">
+              <p className="text-lg font-bold text-slate-800">
                 {new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
               </p>
             </Card>
@@ -147,7 +147,7 @@ export default function DashboardPage() {
                 </svg>
               </div>
               <p className="text-xs text-slate-500 mb-0.5">Role</p>
-              <p className="text-sm font-bold text-slate-100 truncate">
+              <p className="text-sm font-bold text-slate-800 truncate">
                 {user?.role ?? 'Technician'}
               </p>
             </Card>
@@ -169,7 +169,7 @@ export default function DashboardPage() {
                                    justify-center text-xs font-bold text-white flex-shrink-0`}>
                     {item.step}
                   </span>
-                  <span className="text-sm text-slate-300">{item.text}</span>
+                  <span className="text-sm text-slate-600">{item.text}</span>
                 </div>
               ))}
             </div>

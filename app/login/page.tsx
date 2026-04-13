@@ -50,7 +50,7 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-surface-950 overflow-hidden"
+    <div className="min-h-screen flex flex-col bg-surface-50 overflow-hidden"
       style={{ paddingTop: 'env(safe-area-inset-top, 0px)',
                paddingBottom: 'env(safe-area-inset-bottom, 0px)' }}>
 
@@ -74,8 +74,8 @@ export default function LoginPage() {
               <circle cx="12" cy="9" r="2.5" fill="white" opacity="0.85"/>
             </svg>
           </div>
-          <h1 className="text-3xl font-bold text-slate-50 tracking-tight">Welcome back</h1>
-          <p className="text-slate-400 mt-1 text-base">Sign in to your TechCheck account</p>
+          <h1 className="text-3xl font-bold text-slate-900 tracking-tight">Welcome back</h1>
+          <p className="text-slate-500 mt-1 text-base">Sign in to your TechCheck account</p>
         </div>
 
         {/* Form */}
@@ -122,7 +122,7 @@ export default function LoginPage() {
             }
             suffix={
               <button type="button" onClick={() => setShowPw(!showPw)}
-                className="text-slate-400 hover:text-slate-200 transition-colors p-1">
+                className="text-slate-500 hover:text-slate-700 transition-colors p-1">
                 {showPw ? (
                   <svg viewBox="0 0 20 20" className="w-4.5 h-4.5" fill="currentColor">
                     <path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/>

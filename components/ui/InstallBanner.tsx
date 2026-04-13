@@ -20,8 +20,8 @@ export function InstallBanner() {
         </svg>
       </div>
       <div className="flex-1 min-w-0">
-        <p className="text-sm font-semibold text-slate-100">Install TechCheck</p>
-        <p className="text-xs text-slate-400 truncate">Add to home screen for the best experience</p>
+        <p className="text-sm font-semibold text-slate-800">Install TechCheck</p>
+        <p className="text-xs text-slate-500 truncate">Add to home screen for the best experience</p>
       </div>
       <div className="flex gap-2 flex-shrink-0">
         <button onClick={() => setDismissed(true)}

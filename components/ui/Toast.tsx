@@ -23,7 +23,7 @@ const styles: Record<ToastType, string> = {
   success: 'bg-success-500/20 border-success-500/40 text-success-400',
   error:   'bg-danger-500/20  border-danger-500/40  text-danger-400',
   warning: 'bg-warning-500/20 border-warning-500/40 text-warning-400',
-  info:    'bg-brand-500/20   border-brand-500/40   text-brand-400',
+  info:    'bg-brand-500/20   border-brand-500/40   text-brand-600',
 };
 
 export function Toast({ message, type = 'info', duration = 3500, onClose }: ToastProps) {

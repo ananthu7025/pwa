@@ -16,20 +16,20 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     return (
       <div className="flex flex-col gap-1.5">
         {label && (
-          <label htmlFor={inputId} className="text-sm font-medium text-slate-300">
+          <label htmlFor={inputId} className="text-sm font-medium text-slate-600">
             {label}
           </label>
         )}
         <div className="relative flex items-center">
           {icon && (
-            <span className="absolute left-4 text-slate-400 pointer-events-none">{icon}</span>
+            <span className="absolute left-4 text-slate-500 pointer-events-none">{icon}</span>
           )}
           <input
             ref={ref}
             id={inputId}
             className={cx(
-              'w-full h-14 rounded-2xl bg-surface-800 border border-white/10',
-              'text-slate-100 placeholder:text-slate-500',
+              'w-full h-14 rounded-2xl bg-white border border-black/10',
+              'text-slate-800 placeholder:text-slate-500',
               'transition-all duration-150',
               'focus:outline-none focus:border-brand-500 focus:ring-2 focus:ring-brand-500/20',
               icon   ? 'pl-11 pr-4' : 'px-4',
@@ -40,7 +40,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
             {...props}
           />
           {suffix && (
-            <span className="absolute right-4 text-slate-400">{suffix}</span>
+            <span className="absolute right-4 text-slate-500">{suffix}</span>
           )}
         </div>
         {error && (
