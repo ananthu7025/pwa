@@ -36,8 +36,8 @@ const config: Config = {
         warning: { 400: '#fbbf24', 500: '#f59e0b' },
       },
       fontFamily: {
-        sans: ['var(--font-geist-sans)', 'system-ui', 'sans-serif'],
-        mono: ['var(--font-geist-mono)', 'monospace'],
+        sans: ['var(--font-inter)', 'system-ui', 'sans-serif'],
+        mono: ['monospace'],
       },
       borderRadius: {
         '2xl': '1rem',
